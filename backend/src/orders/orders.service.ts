@@ -130,8 +130,9 @@ export class OrdersService {
       .createQueryBuilder('order')
       // .withDeleted()
       .leftJoinAndSelect('order.client', 'client') // только клиент!
+      .leftJoinAndSelect('order.items', 'items')
       .orderBy('order.deletedAt', 'ASC', 'NULLS FIRST')
-      .addOrderBy('order.deliveryDeadline', 'ASC');
+      .addOrderBy('order.createdAt', 'DESC');
 
 // 👇 Обработка фильтра удалённых заказов
 if (deleted === 'only') {
